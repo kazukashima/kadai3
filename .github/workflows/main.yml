@@ -2,13 +2,13 @@ name: Scheduled deploy
 
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 6 * * *" # 毎日 15:00 JST
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build:
+    name: build
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,8 +21,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build   # ← ここで dist を生成する
+      - name: Run build
+        run: npm run build
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
 
       - name: Install firebase-tools
         run: npm install --save-dev firebase-tools
@@ -33,10 +46,7 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/firebase-key.json" >> $GITHUB_ENV
 
       - name: Deploy to Firebase Hosting
-        run: ./node_modules/.bin/firebase deploy --project ${{ secrets.FIREBASE_PROJECT_ID }}
-
-      - name: Delete GOOGLE_APPLICATION_CREDENTIALS
         run: |
-          if [ -n "$GOOGLE_APPLICATION_CREDENTIALS" ]; then
-            rm "$GOOGLE_APPLICATION_CREDENTIALS"
-          fi
+          ./node_modules/.bin/firebase deploy --project ${{ secrets.FIREBASE_PROJECT_ID }}
+        env:
+          GOOGLE_APPLICATION_CREDE
