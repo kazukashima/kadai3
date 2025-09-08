@@ -4,9 +4,15 @@
 // // https://vite.dev/config/
 // export default defineConfig({
 //   plugins: [react()],
-//   build: {
-//     outDir: 'dist', // 🔧 これを追加
-//   },
+// })
+
+// import react from "@vitejs/plugin-react"
+// import { defineConfig } from "vite"
+// import tsconfigPaths from "vite-tsconfig-paths"
+
+// export default defineConfig({
+//   plugins: [react(), tsconfigPaths()],
+  
 // })
 
 import react from "@vitejs/plugin-react"
@@ -15,5 +21,10 @@ import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  root: "sample-chakura",
+  resolve: {
+    alias: {
+      react: require.resolve("react"),
+      "react-dom": require.resolve("react-dom"),
+    },
+  },
 })
