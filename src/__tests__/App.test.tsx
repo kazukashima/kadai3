@@ -4,7 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import userEvent from "@testing-library/user-event";
 import App from "../App";
 
-// ✅ 本物ではなく __mocks__/utils/supabase.ts を使うよう指定
+//  本物ではなく __mocks__/utils/supabase.ts を使うよう指定
 jest.mock("../utils/supabase", () => require("../__mocks__/utils/supabase"));
 
 
@@ -60,7 +60,7 @@ test("学習時間が1未満だとエラーが出る", async () => {
 
   const timeInput = within(dialog).getByLabelText(/学習時間/i);
   await userEvent.clear(timeInput);
-  await userEvent.type(timeInput, "0"); // ❌ 1未満を入力
+  await userEvent.type(timeInput, "0"); //  1未満を入力
 
   const submitBtn = within(dialog).getByRole("button", { name: /登録/i });
   await userEvent.click(submitBtn);

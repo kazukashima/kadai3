@@ -20,7 +20,7 @@
 // src/utils/supabase.ts
 import { createClient } from "@supabase/supabase-js";
 
-// ✅ Vite では import.meta.env を使う
+//  Vite では import.meta.env を使う
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 

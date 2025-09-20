@@ -48,7 +48,7 @@ function App() {
     defaultValues: { title: "", time: 0 },
   });
 
-  // ✅ データ取得
+  //  データ取得
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -60,7 +60,7 @@ function App() {
         setRecords(recs);
       }
     } catch (e) {
-      console.error("❌ fetchDataで例外発生:", e);
+      console.error("fetchDataで例外発生:", e);
       setError((e as Error).message);
     } finally {
       setLoading(false);
@@ -71,7 +71,7 @@ function App() {
     fetchData();
   }, []);
 
-  // ✅ 新規登録 or 編集処理
+  // 新規登録 or 編集処理
   const onSubmit: SubmitHandler<{ title: string; time: number }> = async (
     values
   ) => {
@@ -107,14 +107,14 @@ function App() {
     fetchData();
   };
 
-  // ✅ 編集ボタン押下時
+  // 編集ボタン押下時
   const handleEdit = (record: Record) => {
     setEditingRecord(record);
     reset({ title: record.title, time: record.time });
     onOpen();
   };
 
-  // ✅ 削除処理
+  // 削除処理
   const handleDelete = async (id: string) => {
     const { error } = await supabase.from("study-record").delete().eq("id", id);
     if (error) {
@@ -124,7 +124,7 @@ function App() {
     }
   };
 
-  // ✅ キャンセル時
+  // キャンセル時
   const handleClose = () => {
     setEditingRecord(null);
     reset({ title: "", time: 0 });
@@ -192,7 +192,7 @@ function App() {
         </>
       )}
 
-      {/* ✅ モーダル */}
+      {/* モーダル */}
       <Modal isOpen={isOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>

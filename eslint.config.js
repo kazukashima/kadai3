@@ -19,8 +19,8 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        project: './tsconfig.json',       // ✅ 使いたい tsconfig を明示
-        tsconfigRootDir: __dirname,       // ✅ この config のある場所をルートに指定
+        project: './tsconfig.json',       //  使いたい tsconfig を明示
+        tsconfigRootDir: __dirname,       //  この config のある場所をルートに指定
       },
     },
   },
